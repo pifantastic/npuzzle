@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+  <title>9 Piece</title>
+
+  <link href="/css/style.css" rel="stylesheet">
+
+  <script src="/js/lib/jquery.js"></script>
+  <script src="/js/lib/underscore.js"></script>
+  <script src="/js/lib/backbone.js"></script>
+</head>
+<body>
+  <div class="puzzle js-puzzle">
+    <div class="controls">
+      <button class="js-solve">Solve</button>
+      <button class="js-shuffle">Shuffle</button>
+      <label>theme:
+        <select class="js-theme">
+          <option value="cat">Cat</option>
+          <option value="dog">Dog</option>
+          <option value="nature">Nature</option>
+        </select>
+      </label>
+    </div>
+    <div class="tiles"></div>
+  </div>
+
+  <script>
+    var require = {
+      paths: {
+        jquery: 'lib/jquery',
+        underscore: 'lib/underscore',
+        backbone: 'lib/backbone'
+      },
+      shim: {
+        jquery: { exports: 'jQuery' },
+        underscore: { exports: '_' },
+        Backbone: { exports: 'Backbone' }
+      }
+    };
+  </script>
+  <script data-main="/js/main" src="/js/lib/require.js"></script>
+</body>
