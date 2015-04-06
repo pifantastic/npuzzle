@@ -24,46 +24,10 @@ type asset struct {
 	info  os.FileInfo
 }
 
-// static_ds_store reads file data from disk. It returns an error on failure.
-func static_ds_store() (*asset, error) {
-	path := filepath.Join(rootDir, "static/.DS_Store")
-	name := "static/.DS_Store"
-	bytes, err := bindata_read(path, name)
-	if err != nil {
-		return nil, err
-	}
-
-	fi, err := os.Stat(path)
-	if err != nil {
-		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
-	}
-
-	a := &asset{bytes: bytes, info: fi}
-	return a, err
-}
-
 // static_css_style_css reads file data from disk. It returns an error on failure.
 func static_css_style_css() (*asset, error) {
 	path := filepath.Join(rootDir, "static/css/style.css")
 	name := "static/css/style.css"
-	bytes, err := bindata_read(path, name)
-	if err != nil {
-		return nil, err
-	}
-
-	fi, err := os.Stat(path)
-	if err != nil {
-		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
-	}
-
-	a := &asset{bytes: bytes, info: fi}
-	return a, err
-}
-
-// static_img_ds_store reads file data from disk. It returns an error on failure.
-func static_img_ds_store() (*asset, error) {
-	path := filepath.Join(rootDir, "static/img/.DS_Store")
-	name := "static/img/.DS_Store"
 	bytes, err := bindata_read(path, name)
 	if err != nil {
 		return nil, err
@@ -400,9 +364,7 @@ func AssetNames() []string {
 
 // _bindata is a table, holding each asset generator, mapped to its name.
 var _bindata = map[string]func() (*asset, error){
-	"static/.DS_Store": static_ds_store,
 	"static/css/style.css": static_css_style_css,
-	"static/img/.DS_Store": static_img_ds_store,
 	"static/img/cat.png": static_img_cat_png,
 	"static/img/dog.png": static_img_dog_png,
 	"static/img/nature.png": static_img_nature_png,
@@ -461,15 +423,11 @@ type _bintree_t struct {
 }
 var _bintree = &_bintree_t{nil, map[string]*_bintree_t{
 	"static": &_bintree_t{nil, map[string]*_bintree_t{
-		".DS_Store": &_bintree_t{static_ds_store, map[string]*_bintree_t{
-		}},
 		"css": &_bintree_t{nil, map[string]*_bintree_t{
 			"style.css": &_bintree_t{static_css_style_css, map[string]*_bintree_t{
 			}},
 		}},
 		"img": &_bintree_t{nil, map[string]*_bintree_t{
-			".DS_Store": &_bintree_t{static_img_ds_store, map[string]*_bintree_t{
-			}},
 			"cat.png": &_bintree_t{static_img_cat_png, map[string]*_bintree_t{
 			}},
 			"dog.png": &_bintree_t{static_img_dog_png, map[string]*_bintree_t{
