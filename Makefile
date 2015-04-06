@@ -9,4 +9,7 @@ build-dev:
 
 build:
 	go-bindata-assetfs -ignore=.DS_Store static/...
-	go build $(srcfiles)
+	go build -o npuzzle $(srcfiles)
+
+test:
+	karma start karma.conf.js --single-run
