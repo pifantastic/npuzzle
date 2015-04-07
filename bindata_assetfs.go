@@ -24,6 +24,150 @@ type asset struct {
 	info  os.FileInfo
 }
 
+// static_css_fonts_glyphicons_halflings_regular_eot reads file data from disk. It returns an error on failure.
+func static_css_fonts_glyphicons_halflings_regular_eot() (*asset, error) {
+	path := filepath.Join(rootDir, "static/css/fonts/glyphicons-halflings-regular.eot")
+	name := "static/css/fonts/glyphicons-halflings-regular.eot"
+	bytes, err := bindata_read(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
+// static_css_fonts_glyphicons_halflings_regular_svg reads file data from disk. It returns an error on failure.
+func static_css_fonts_glyphicons_halflings_regular_svg() (*asset, error) {
+	path := filepath.Join(rootDir, "static/css/fonts/glyphicons-halflings-regular.svg")
+	name := "static/css/fonts/glyphicons-halflings-regular.svg"
+	bytes, err := bindata_read(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
+// static_css_fonts_glyphicons_halflings_regular_ttf reads file data from disk. It returns an error on failure.
+func static_css_fonts_glyphicons_halflings_regular_ttf() (*asset, error) {
+	path := filepath.Join(rootDir, "static/css/fonts/glyphicons-halflings-regular.ttf")
+	name := "static/css/fonts/glyphicons-halflings-regular.ttf"
+	bytes, err := bindata_read(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
+// static_css_fonts_glyphicons_halflings_regular_woff reads file data from disk. It returns an error on failure.
+func static_css_fonts_glyphicons_halflings_regular_woff() (*asset, error) {
+	path := filepath.Join(rootDir, "static/css/fonts/glyphicons-halflings-regular.woff")
+	name := "static/css/fonts/glyphicons-halflings-regular.woff"
+	bytes, err := bindata_read(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
+// static_css_fonts_glyphicons_halflings_regular_woff2 reads file data from disk. It returns an error on failure.
+func static_css_fonts_glyphicons_halflings_regular_woff2() (*asset, error) {
+	path := filepath.Join(rootDir, "static/css/fonts/glyphicons-halflings-regular.woff2")
+	name := "static/css/fonts/glyphicons-halflings-regular.woff2"
+	bytes, err := bindata_read(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
+// static_css_lib_animate_css reads file data from disk. It returns an error on failure.
+func static_css_lib_animate_css() (*asset, error) {
+	path := filepath.Join(rootDir, "static/css/lib/animate.css")
+	name := "static/css/lib/animate.css"
+	bytes, err := bindata_read(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
+// static_css_lib_bootstrap_theme_min_css reads file data from disk. It returns an error on failure.
+func static_css_lib_bootstrap_theme_min_css() (*asset, error) {
+	path := filepath.Join(rootDir, "static/css/lib/bootstrap-theme.min.css")
+	name := "static/css/lib/bootstrap-theme.min.css"
+	bytes, err := bindata_read(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
+// static_css_lib_bootstrap_min_css reads file data from disk. It returns an error on failure.
+func static_css_lib_bootstrap_min_css() (*asset, error) {
+	path := filepath.Join(rootDir, "static/css/lib/bootstrap.min.css")
+	name := "static/css/lib/bootstrap.min.css"
+	bytes, err := bindata_read(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
 // static_css_style_css reads file data from disk. It returns an error on failure.
 func static_css_style_css() (*asset, error) {
 	path := filepath.Join(rootDir, "static/css/style.css")
@@ -364,6 +508,14 @@ func AssetNames() []string {
 
 // _bindata is a table, holding each asset generator, mapped to its name.
 var _bindata = map[string]func() (*asset, error){
+	"static/css/fonts/glyphicons-halflings-regular.eot": static_css_fonts_glyphicons_halflings_regular_eot,
+	"static/css/fonts/glyphicons-halflings-regular.svg": static_css_fonts_glyphicons_halflings_regular_svg,
+	"static/css/fonts/glyphicons-halflings-regular.ttf": static_css_fonts_glyphicons_halflings_regular_ttf,
+	"static/css/fonts/glyphicons-halflings-regular.woff": static_css_fonts_glyphicons_halflings_regular_woff,
+	"static/css/fonts/glyphicons-halflings-regular.woff2": static_css_fonts_glyphicons_halflings_regular_woff2,
+	"static/css/lib/animate.css": static_css_lib_animate_css,
+	"static/css/lib/bootstrap-theme.min.css": static_css_lib_bootstrap_theme_min_css,
+	"static/css/lib/bootstrap.min.css": static_css_lib_bootstrap_min_css,
 	"static/css/style.css": static_css_style_css,
 	"static/img/cat.png": static_img_cat_png,
 	"static/img/dog.png": static_img_dog_png,
@@ -424,6 +576,26 @@ type _bintree_t struct {
 var _bintree = &_bintree_t{nil, map[string]*_bintree_t{
 	"static": &_bintree_t{nil, map[string]*_bintree_t{
 		"css": &_bintree_t{nil, map[string]*_bintree_t{
+			"fonts": &_bintree_t{nil, map[string]*_bintree_t{
+				"glyphicons-halflings-regular.eot": &_bintree_t{static_css_fonts_glyphicons_halflings_regular_eot, map[string]*_bintree_t{
+				}},
+				"glyphicons-halflings-regular.svg": &_bintree_t{static_css_fonts_glyphicons_halflings_regular_svg, map[string]*_bintree_t{
+				}},
+				"glyphicons-halflings-regular.ttf": &_bintree_t{static_css_fonts_glyphicons_halflings_regular_ttf, map[string]*_bintree_t{
+				}},
+				"glyphicons-halflings-regular.woff": &_bintree_t{static_css_fonts_glyphicons_halflings_regular_woff, map[string]*_bintree_t{
+				}},
+				"glyphicons-halflings-regular.woff2": &_bintree_t{static_css_fonts_glyphicons_halflings_regular_woff2, map[string]*_bintree_t{
+				}},
+			}},
+			"lib": &_bintree_t{nil, map[string]*_bintree_t{
+				"animate.css": &_bintree_t{static_css_lib_animate_css, map[string]*_bintree_t{
+				}},
+				"bootstrap-theme.min.css": &_bintree_t{static_css_lib_bootstrap_theme_min_css, map[string]*_bintree_t{
+				}},
+				"bootstrap.min.css": &_bintree_t{static_css_lib_bootstrap_min_css, map[string]*_bintree_t{
+				}},
+			}},
 			"style.css": &_bintree_t{static_css_style_css, map[string]*_bintree_t{
 			}},
 		}},

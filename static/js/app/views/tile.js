@@ -24,6 +24,11 @@ define(function(require) {
       if (this.model.distance(blank) === 1) {
         this.collection.swap(this.model, blank);
       }
+      else {
+        this.$el.addClass('shake').one('webkitAnimationEnd', function() {
+          this.$el.removeClass('shake')
+        }.bind(this));
+      }
     },
 
     move: function() {

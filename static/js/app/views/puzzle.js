@@ -16,6 +16,7 @@ define(function(require) {
     initialize: function() {
       this.model = new Puzzle();
       this.model.on('sync', this.render, this);
+      this.model.on('change:solving', this.solving, this);
       this.shuffle();
     },
 
@@ -28,33 +29,54 @@ define(function(require) {
       this.model.get('board').invoke('set', 'theme', theme);
     },
 
+    solving: function() {
+      this.$el.toggleClass('solving', this.model.get('solving'));
+      this.$('.js-solve').text(this.model.get('solving') ? 'Solving' : 'Solve');
+      this.$('button, select').prop('disabled', this.model.get('solving'));
+    },
+
     solve: function() {
+      if (this.model.get('solving')) {
+        return true;
+      }
+
+      this.model.set('solving', true);
+
       var solution = new Solution({
         board: this.model.get('board')
       });
 
       solution.once('change', function() {
         var moves = solution.get('moves');
+        this.model.get('board').move(moves.shift());
 
-        setInterval(function() {
+        var interval = setInterval(function() {
           this.model.get('board').move(moves.shift());
-        }.bind(this), 400);
+
+          if (moves.length === 0) {
+            this.model.set('solving', false);
+            clearInterval(interval);
+          }
+        }.bind(this), 300);
       }.bind(this));
 
       solution.fetch();
     },
 
     render: function() {
-      var $tiles = this.$('.tiles');
+      this.$el.addClass('puzzle-' + this.model.get('dimension'));
+      var $tiles = this.$('.js-tiles');
 
       var width = $tiles.width() / this.model.get('dimension');
       var height = $tiles.height() / this.model.get('dimension');
+      var theme = this.$('.js-theme').val();
 
       $tiles.empty();
 
       this.model.get('board').forEach(function(tile) {
         tile.set('width', width);
         tile.set('height', height);
+        tile.set('theme', theme);
 
         var view = new TileView({
           model: tile,
