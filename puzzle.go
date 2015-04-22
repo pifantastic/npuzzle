@@ -1,7 +1,9 @@
 package main
 
 import (
+	"bytes"
 	"container/heap"
+	"fmt"
 )
 
 const (
@@ -10,7 +12,7 @@ const (
 	LEFT  = "Left"
 	RIGHT = "Right"
 
-	BLANK = 0
+	BLANK = 8
 
 	EIGHT_PIECE_GOAL   uint = 36344967696
 	FIFTEEN_PIECE_GOAL uint = 18364758544493064720
@@ -85,4 +87,13 @@ func (puzzle *Puzzle) Solve() []string {
 	}
 
 	return nil
+}
+
+func (puzzle *Puzzle) String() string {
+	buffer := bytes.NewBufferString("\n")
+
+	fmt.Fprintf(buffer, "Dimension: %d\n", puzzle.Dimension)
+	fmt.Fprintf(buffer, "Board:%s", puzzle.Board)
+
+	return buffer.String()
 }

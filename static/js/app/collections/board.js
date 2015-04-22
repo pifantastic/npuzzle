@@ -44,7 +44,7 @@ define(function(require) {
 
   }, {
 
-    BLANK: 0,
+    BLANK: 8,
 
     UP: 'Up',
     DOWN: 'Down',

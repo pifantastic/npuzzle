@@ -276,6 +276,42 @@ func static_js_app_collections_board_js() (*asset, error) {
 	return a, err
 }
 
+// static_js_app_collections_leaderboard_js reads file data from disk. It returns an error on failure.
+func static_js_app_collections_leaderboard_js() (*asset, error) {
+	path := filepath.Join(rootDir, "static/js/app/collections/leaderboard.js")
+	name := "static/js/app/collections/leaderboard.js"
+	bytes, err := bindata_read(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
+// static_js_app_models_leaderboard_entry_js reads file data from disk. It returns an error on failure.
+func static_js_app_models_leaderboard_entry_js() (*asset, error) {
+	path := filepath.Join(rootDir, "static/js/app/models/leaderboard_entry.js")
+	name := "static/js/app/models/leaderboard_entry.js"
+	bytes, err := bindata_read(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
 // static_js_app_models_puzzle_js reads file data from disk. It returns an error on failure.
 func static_js_app_models_puzzle_js() (*asset, error) {
 	path := filepath.Join(rootDir, "static/js/app/models/puzzle.js")
@@ -330,6 +366,96 @@ func static_js_app_models_tile_js() (*asset, error) {
 	return a, err
 }
 
+// static_js_app_templates_leaderboard_hbs reads file data from disk. It returns an error on failure.
+func static_js_app_templates_leaderboard_hbs() (*asset, error) {
+	path := filepath.Join(rootDir, "static/js/app/templates/leaderboard.hbs")
+	name := "static/js/app/templates/leaderboard.hbs"
+	bytes, err := bindata_read(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
+// static_js_app_templates_leaderboard_entry_hbs reads file data from disk. It returns an error on failure.
+func static_js_app_templates_leaderboard_entry_hbs() (*asset, error) {
+	path := filepath.Join(rootDir, "static/js/app/templates/leaderboard_entry.hbs")
+	name := "static/js/app/templates/leaderboard_entry.hbs"
+	bytes, err := bindata_read(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
+// static_js_app_templates_puzzle_hbs reads file data from disk. It returns an error on failure.
+func static_js_app_templates_puzzle_hbs() (*asset, error) {
+	path := filepath.Join(rootDir, "static/js/app/templates/puzzle.hbs")
+	name := "static/js/app/templates/puzzle.hbs"
+	bytes, err := bindata_read(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
+// static_js_app_views_leaderboard_js reads file data from disk. It returns an error on failure.
+func static_js_app_views_leaderboard_js() (*asset, error) {
+	path := filepath.Join(rootDir, "static/js/app/views/leaderboard.js")
+	name := "static/js/app/views/leaderboard.js"
+	bytes, err := bindata_read(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
+// static_js_app_views_leaderboard_entry_js reads file data from disk. It returns an error on failure.
+func static_js_app_views_leaderboard_entry_js() (*asset, error) {
+	path := filepath.Join(rootDir, "static/js/app/views/leaderboard_entry.js")
+	name := "static/js/app/views/leaderboard_entry.js"
+	bytes, err := bindata_read(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
 // static_js_app_views_puzzle_js reads file data from disk. It returns an error on failure.
 func static_js_app_views_puzzle_js() (*asset, error) {
 	path := filepath.Join(rootDir, "static/js/app/views/puzzle.js")
@@ -366,6 +492,24 @@ func static_js_app_views_tile_js() (*asset, error) {
 	return a, err
 }
 
+// static_js_build_js reads file data from disk. It returns an error on failure.
+func static_js_build_js() (*asset, error) {
+	path := filepath.Join(rootDir, "static/js/build.js")
+	name := "static/js/build.js"
+	bytes, err := bindata_read(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
 // static_js_lib_backbone_js reads file data from disk. It returns an error on failure.
 func static_js_lib_backbone_js() (*asset, error) {
 	path := filepath.Join(rootDir, "static/js/lib/backbone.js")
@@ -384,10 +528,46 @@ func static_js_lib_backbone_js() (*asset, error) {
 	return a, err
 }
 
+// static_js_lib_handlebars_js reads file data from disk. It returns an error on failure.
+func static_js_lib_handlebars_js() (*asset, error) {
+	path := filepath.Join(rootDir, "static/js/lib/handlebars.js")
+	name := "static/js/lib/handlebars.js"
+	bytes, err := bindata_read(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
 // static_js_lib_jquery_js reads file data from disk. It returns an error on failure.
 func static_js_lib_jquery_js() (*asset, error) {
 	path := filepath.Join(rootDir, "static/js/lib/jquery.js")
 	name := "static/js/lib/jquery.js"
+	bytes, err := bindata_read(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
+// static_js_lib_require_text_js reads file data from disk. It returns an error on failure.
+func static_js_lib_require_text_js() (*asset, error) {
+	path := filepath.Join(rootDir, "static/js/lib/require/text.js")
+	name := "static/js/lib/require/text.js"
 	bytes, err := bindata_read(path, name)
 	if err != nil {
 		return nil, err
@@ -522,13 +702,23 @@ var _bindata = map[string]func() (*asset, error){
 	"static/img/nature.png": static_img_nature_png,
 	"static/index.html": static_index_html,
 	"static/js/app/collections/board.js": static_js_app_collections_board_js,
+	"static/js/app/collections/leaderboard.js": static_js_app_collections_leaderboard_js,
+	"static/js/app/models/leaderboard_entry.js": static_js_app_models_leaderboard_entry_js,
 	"static/js/app/models/puzzle.js": static_js_app_models_puzzle_js,
 	"static/js/app/models/solution.js": static_js_app_models_solution_js,
 	"static/js/app/models/tile.js": static_js_app_models_tile_js,
+	"static/js/app/templates/leaderboard.hbs": static_js_app_templates_leaderboard_hbs,
+	"static/js/app/templates/leaderboard_entry.hbs": static_js_app_templates_leaderboard_entry_hbs,
+	"static/js/app/templates/puzzle.hbs": static_js_app_templates_puzzle_hbs,
+	"static/js/app/views/leaderboard.js": static_js_app_views_leaderboard_js,
+	"static/js/app/views/leaderboard_entry.js": static_js_app_views_leaderboard_entry_js,
 	"static/js/app/views/puzzle.js": static_js_app_views_puzzle_js,
 	"static/js/app/views/tile.js": static_js_app_views_tile_js,
+	"static/js/build.js": static_js_build_js,
 	"static/js/lib/backbone.js": static_js_lib_backbone_js,
+	"static/js/lib/handlebars.js": static_js_lib_handlebars_js,
 	"static/js/lib/jquery.js": static_js_lib_jquery_js,
+	"static/js/lib/require/text.js": static_js_lib_require_text_js,
 	"static/js/lib/require.js": static_js_lib_require_js,
 	"static/js/lib/underscore.js": static_js_lib_underscore_js,
 	"static/js/main.js": static_js_main_js,
@@ -614,8 +804,12 @@ var _bintree = &_bintree_t{nil, map[string]*_bintree_t{
 				"collections": &_bintree_t{nil, map[string]*_bintree_t{
 					"board.js": &_bintree_t{static_js_app_collections_board_js, map[string]*_bintree_t{
 					}},
+					"leaderboard.js": &_bintree_t{static_js_app_collections_leaderboard_js, map[string]*_bintree_t{
+					}},
 				}},
 				"models": &_bintree_t{nil, map[string]*_bintree_t{
+					"leaderboard_entry.js": &_bintree_t{static_js_app_models_leaderboard_entry_js, map[string]*_bintree_t{
+					}},
 					"puzzle.js": &_bintree_t{static_js_app_models_puzzle_js, map[string]*_bintree_t{
 					}},
 					"solution.js": &_bintree_t{static_js_app_models_solution_js, map[string]*_bintree_t{
@@ -623,17 +817,37 @@ var _bintree = &_bintree_t{nil, map[string]*_bintree_t{
 					"tile.js": &_bintree_t{static_js_app_models_tile_js, map[string]*_bintree_t{
 					}},
 				}},
+				"templates": &_bintree_t{nil, map[string]*_bintree_t{
+					"leaderboard.hbs": &_bintree_t{static_js_app_templates_leaderboard_hbs, map[string]*_bintree_t{
+					}},
+					"leaderboard_entry.hbs": &_bintree_t{static_js_app_templates_leaderboard_entry_hbs, map[string]*_bintree_t{
+					}},
+					"puzzle.hbs": &_bintree_t{static_js_app_templates_puzzle_hbs, map[string]*_bintree_t{
+					}},
+				}},
 				"views": &_bintree_t{nil, map[string]*_bintree_t{
+					"leaderboard.js": &_bintree_t{static_js_app_views_leaderboard_js, map[string]*_bintree_t{
+					}},
+					"leaderboard_entry.js": &_bintree_t{static_js_app_views_leaderboard_entry_js, map[string]*_bintree_t{
+					}},
 					"puzzle.js": &_bintree_t{static_js_app_views_puzzle_js, map[string]*_bintree_t{
 					}},
 					"tile.js": &_bintree_t{static_js_app_views_tile_js, map[string]*_bintree_t{
 					}},
 				}},
 			}},
+			"build.js": &_bintree_t{static_js_build_js, map[string]*_bintree_t{
+			}},
 			"lib": &_bintree_t{nil, map[string]*_bintree_t{
 				"backbone.js": &_bintree_t{static_js_lib_backbone_js, map[string]*_bintree_t{
 				}},
+				"handlebars.js": &_bintree_t{static_js_lib_handlebars_js, map[string]*_bintree_t{
+				}},
 				"jquery.js": &_bintree_t{static_js_lib_jquery_js, map[string]*_bintree_t{
+				}},
+				"require": &_bintree_t{nil, map[string]*_bintree_t{
+					"text.js": &_bintree_t{static_js_lib_require_text_js, map[string]*_bintree_t{
+					}},
 				}},
 				"require.js": &_bintree_t{static_js_lib_require_js, map[string]*_bintree_t{
 				}},

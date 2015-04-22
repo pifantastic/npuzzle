@@ -1,5 +1,5 @@
 
-srcfiles := main.go puzzle.go board.go priority_queue.go api.go middleware.go bindata_assetfs.go
+srcfiles := main.go puzzle.go board.go priority_queue.go api.go middleware.go bindata_assetfs.go leaderboard.go
 
 run:
 	go run $(srcfiles)

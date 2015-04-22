@@ -4,8 +4,11 @@ define(function(require) {
   var Puzzle = require('app/models/puzzle');
   var Solution = require('app/models/solution');
   var TileView = require('app/views/tile');
+  var Handlebars = require('handlebars');
 
   return Backbone.View.extend({
+
+    template: Handlebars.compile(require('text!app/templates/puzzle.hbs')),
 
     events: {
       'click .js-solve': 'solve',
@@ -64,6 +67,8 @@ define(function(require) {
     },
 
     render: function() {
+      this.$el.html(this.template());
+
       this.$el.addClass('puzzle-' + this.model.get('dimension'));
       var $tiles = this.$('.js-tiles');
 

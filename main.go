@@ -26,8 +26,13 @@ func main() {
 
 	http.HandleFunc("/api/v1/puzzles", Puzzles)
 	http.HandleFunc("/api/v1/solutions", Solutions)
+	http.HandleFunc("/api/v1/leaderboards", Leaderboards)
 
 	http.Handle("/", http.FileServer(assetFS()))
+
+	http.HandleFunc("/leaderboard", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, "static/index.html")
+	})
 
 	log.Printf("Listening at http://localhost:%d", port)
 	http.ListenAndServe(fmt.Sprintf(":%d", port), LoggingMiddleware(http.DefaultServeMux))

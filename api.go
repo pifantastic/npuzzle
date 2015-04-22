@@ -1,10 +1,17 @@
 package main
 
 import (
+	"crypto/md5"
 	"encoding/json"
+	"fmt"
+	"github.com/Pallinder/go-randomdata"
 	log "github.com/Sirupsen/logrus"
 	"net/http"
 	"strconv"
+)
+
+const (
+	PAGE_SIZE = 50
 )
 
 type SolutionRequest struct {
@@ -51,4 +58,32 @@ func Solutions(response http.ResponseWriter, request *http.Request) {
 	}
 
 	response.Write(solutionJson)
+}
+
+func Leaderboards(response http.ResponseWriter, request *http.Request) {
+	response.Header().Set("Content-Type", "application/json")
+
+	page, err := strconv.ParseInt(request.URL.Query().Get("page"), 10, 0)
+
+	if err != nil {
+		page = 1
+	}
+
+	entries := make([]LeaderboardEntry, 0)
+
+	for x := 0; x < PAGE_SIZE; x++ {
+		entries = append(entries, LeaderboardEntry{
+			Id:    int(page-1)*PAGE_SIZE + x,
+			Name:  randomdata.FullName(randomdata.RandomGender),
+			Moves: int(page-1)*PAGE_SIZE + x,
+			Hash:  fmt.Sprintf("%x", md5.Sum([]byte(strconv.Itoa(x)))),
+		})
+	}
+
+	leaderboard := Leaderboard{
+		Entries: entries,
+	}
+
+	leaderboardJson, _ := json.Marshal(leaderboard)
+	response.Write(leaderboardJson)
 }

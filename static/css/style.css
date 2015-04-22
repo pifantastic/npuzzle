@@ -66,3 +66,34 @@ body {
     -webkit-transform: translateX(0);
   }
 }
+
+.leaderboard {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.leaderboard .entries {
+
+}
+
+.leaderboard .entry {
+  border-bottom: 1px solid #ddd;
+  padding: 10px;
+  height: 44px;
+}
+
+
+.leaderboard .entry img {
+  height: 24px;
+  width: 24px;
+  display: inline-block;
+  margin: 0 10px 0 0;
+}
+
+.leaderboard .entry .name {
+}
+
+.leaderboard .entry .score {
+  display: inline-block;
+  float: right;
+}
