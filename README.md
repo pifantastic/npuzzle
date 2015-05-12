@@ -13,6 +13,8 @@ installing node can be found [here](https://nodejs.org/download/).
 
 ## Installation
 
+`go get github.com/pifantastic/npuzzle`
+
 To run the local web server, execute `make` in the root directory.
 
 ## Tests
