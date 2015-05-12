@@ -5,6 +5,7 @@ import (
 	"net/http"
 )
 
+// Http middleware that logs each request.
 func LoggingMiddleware(handler http.Handler) http.Handler {
 	return http.HandlerFunc(func(response http.ResponseWriter, request *http.Request) {
 		log.Printf("%s: %s", request.Method, request.URL.Path)

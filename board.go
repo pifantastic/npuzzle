@@ -9,6 +9,7 @@ import (
 	"time"
 )
 
+// Represents a puzzle board.
 type Board struct {
 	Dimension int  `json:"-"`
 	State     uint `json:"state"`
@@ -18,11 +19,13 @@ type Board struct {
 	index    int    `json:"-"`
 }
 
+// Create a new board.
 func NewBoard() *Board {
 	board := Board{}
 	return &board
 }
 
+// Create a new board from a 2 dimensional array or matrix.
 func NewBoardFromMatrix(matrix [][]int) *Board {
 	board := Board{Dimension: len(matrix)}
 
@@ -36,6 +39,7 @@ func NewBoardFromMatrix(matrix [][]int) *Board {
 	return &board
 }
 
+// Create a new board from an array.
 func NewBoardFromArray(array []int) *Board {
 	board := Board{Dimension: int(math.Sqrt(float64(len(array))))}
 
@@ -46,6 +50,7 @@ func NewBoardFromArray(array []int) *Board {
 	return &board
 }
 
+// Create a new randomized board.
 func NewRandomBoard(dimension int) *Board {
 	r := rand.New(rand.NewSource(time.Now().UnixNano()))
 	length := dimension * dimension
@@ -61,6 +66,8 @@ func NewRandomBoard(dimension int) *Board {
 	return board
 }
 
+// Custom JSON marshaller. Allows us to transform the board state (stored
+// as a uint) into an array, better suited for JSON.
 func (board *Board) MarshalJSON() ([]byte, error) {
 	state := make([]int, 0)
 
@@ -77,19 +84,12 @@ func (board *Board) MarshalJSON() ([]byte, error) {
 	})
 }
 
-func (board *Board) UnmarshalJSON(data []byte) error {
-	json.Unmarshal(data, struct {
-		Board
-		State []int `json:"state"`
-	}{})
-
-	return nil
-}
-
+// Returns the length of the board (the total number of tiles).
 func (board *Board) Len() int {
 	return board.Dimension * board.Dimension
 }
 
+// Returns true if a solution exists for the board's state.
 func (board *Board) Solvable() bool {
 	inversions := 0
 
@@ -111,6 +111,7 @@ func (board *Board) Solvable() bool {
 	return (inversions & 0x1) != 1
 }
 
+// Returns true of the board's state is the solution state.
 func (board *Board) Solved() bool {
 	if board.Dimension == 3 {
 		return board.State == EIGHT_PIECE_GOAL
@@ -120,6 +121,7 @@ func (board *Board) Solved() bool {
 	return false
 }
 
+// Returns a string representation of the board.
 func (board *Board) String() string {
 	buffer := bytes.NewBufferString("\n")
 
@@ -134,6 +136,7 @@ func (board *Board) String() string {
 	return buffer.String()
 }
 
+// Returns a clone of the board.
 func (board *Board) Clone() *Board {
 	clone := NewBoard()
 	*clone = *board
@@ -141,6 +144,9 @@ func (board *Board) Clone() *Board {
 	return clone
 }
 
+// Returns the cost of the board. This is a heuristic for determining how far
+// the board's state is from the goal state.  Currently implemented using
+// Manhatten Distance.
 func (board *Board) Cost() int {
 	cost := 0
 
@@ -163,6 +169,7 @@ func (board *Board) Cost() int {
 	return cost
 }
 
+// Returns the location of the blank tile on the board.
 func (board *Board) PositionOfBlank() int {
 	for i := 0; i < board.Len(); i++ {
 		if board.GetTileAt(i) == BLANK {
@@ -172,16 +179,20 @@ func (board *Board) PositionOfBlank() int {
 	return -1
 }
 
+// Returns the tile at the specified index.
 func (board *Board) GetTileAt(index int) int {
 	return int((board.State >> (uint(index) << uint(2))) & 0xF)
 }
 
+// Sets the value of the tile at the specified index.
 func (board *Board) SetTileAt(index int, value int) {
 	mask := uint(0xF) << (uint(index) << uint(2))
 	board.State &= ^mask
 	board.State |= (uint(value) << (uint(index) << uint(2)))
 }
 
+// Create a new board by performing the specified move. Returns nil if the
+// move is not possible.
 func (board *Board) Move(direction string) *Board {
 	switch direction {
 	case UP:
@@ -196,6 +207,7 @@ func (board *Board) Move(direction string) *Board {
 	return nil
 }
 
+// Return a new board by moving the blank tile to the left.
 func (board *Board) Left() *Board {
 	blankPosition := board.PositionOfBlank()
 	if blankPosition%board.Dimension == 0 {
@@ -211,6 +223,7 @@ func (board *Board) Left() *Board {
 	return clone
 }
 
+// Return a new board by moving the blank tile to the right.
 func (board *Board) Right() *Board {
 	blankPosition := board.PositionOfBlank()
 	if (blankPosition+1)%board.Dimension == 0 {
@@ -226,6 +239,7 @@ func (board *Board) Right() *Board {
 	return clone
 }
 
+// Return a new board by moving the blank tile up.
 func (board *Board) Up() *Board {
 	blankPosition := board.PositionOfBlank()
 	if blankPosition < board.Dimension {
@@ -241,6 +255,7 @@ func (board *Board) Up() *Board {
 	return clone
 }
 
+// Return a new board by moving the blank tile down.
 func (board *Board) Down() *Board {
 	blankPosition := board.PositionOfBlank()
 	if blankPosition >= (board.Len() - board.Dimension) {

@@ -20,11 +20,13 @@ const (
 
 var MOVES = []string{UP, DOWN, LEFT, RIGHT}
 
+// Represents an n-piece puzzle with n=Dimension.
 type Puzzle struct {
 	Dimension int    `json:"dimension"`
 	Board     *Board `json:"board"`
 }
 
+// Create a new puzzle with a randomized board.
 func NewPuzzle(dimension int) *Puzzle {
 	puzzle := Puzzle{
 		Dimension: dimension,
@@ -33,6 +35,7 @@ func NewPuzzle(dimension int) *Puzzle {
 	return &puzzle
 }
 
+// Returns an array of the "moves" required to solve the puzzle.
 func (puzzle *Puzzle) Solve() []string {
 	solved := false
 
@@ -41,20 +44,26 @@ func (puzzle *Puzzle) Solve() []string {
 	open := make(PriorityQueue, 0)
 
 	heap.Init(&open)
+
+	// Start with the puzzle's current solution on the open queue.
 	heap.Push(&open, puzzle.Board)
 
 	var current *Board
 
 	for open.Len() > 0 {
+		// Grab the best move from the open queue.
 		current = heap.Pop(&open).(*Board)
 
+		// Check if we've reached the solution.
 		if current.Solved() {
 			solved = true
 			break
 		}
 
+		// Record this board state.
 		closedMap[current.State] = current
 
+		// Expand the board's state into all possible moves.
 		for _, move := range MOVES {
 			next := current.Move(move)
 
@@ -89,6 +98,7 @@ func (puzzle *Puzzle) Solve() []string {
 	return nil
 }
 
+// Returns a string representation of the puzzle.
 func (puzzle *Puzzle) String() string {
 	buffer := bytes.NewBufferString("\n")
 

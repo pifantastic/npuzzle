@@ -4,6 +4,11 @@ import (
 	"container/heap"
 )
 
+// An implementation of a priority queue taken from the golang container
+// documentation: http://golang.org/pkg/container/heap/
+//
+// The items in the queue are puzzle boards. Priority is mapped to board cost,
+// which means boards with a lower cost are given a higher priority.
 type PriorityQueue []*Board
 
 func (pq PriorityQueue) Len() int { return len(pq) }

@@ -18,23 +18,27 @@ type SolutionRequest struct {
 	Board []int `json:"board"`
 }
 
+// Returns a new, randomized puzzle.
 func Puzzles(response http.ResponseWriter, request *http.Request) {
 	response.Header().Set("Content-Type", "application/json")
 
-	size, err := strconv.ParseInt(request.URL.Query().Get("size"), 10, 0)
+	// The "dimension" is the length of the side of the desired puzzle.
+	dimension, err := strconv.ParseInt(request.URL.Query().Get("dimension"), 10, 0)
 
 	if err != nil {
-		size = 3
+		dimension = 3
 	}
 
-	puzzle := NewPuzzle(int(size))
+	puzzle := NewPuzzle(int(dimension))
 	puzzleJson, _ := json.Marshal(puzzle)
 	response.Write(puzzleJson)
 }
 
+// Solve a given puzzle.
 func Solutions(response http.ResponseWriter, request *http.Request) {
 	response.Header().Set("Content-Type", "application/json")
 
+	// Request body should be a JSON serialized `SolutionRequest`.
 	decoder := json.NewDecoder(request.Body)
 
 	var solutionRequest SolutionRequest
@@ -60,6 +64,7 @@ func Solutions(response http.ResponseWriter, request *http.Request) {
 	response.Write(solutionJson)
 }
 
+// Get the specified page of the leaderboards.
 func Leaderboards(response http.ResponseWriter, request *http.Request) {
 	response.Header().Set("Content-Type", "application/json")
 
