@@ -14,7 +14,7 @@ type PriorityQueue []*Board
 func (pq PriorityQueue) Len() int { return len(pq) }
 
 func (pq PriorityQueue) Less(i, j int) bool {
-	return pq[i].Cost() < pq[j].Cost()
+	return pq[i].cost < pq[j].cost
 }
 
 func (pq PriorityQueue) Swap(i, j int) {

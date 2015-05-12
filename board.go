@@ -14,6 +14,8 @@ type Board struct {
 	Dimension int  `json:"-"`
 	State     uint `json:"state"`
 
+	cost     int    `json:"-"`
+	g        int    `json:"-"`
 	previous *Board `json:"-"`
 	move     string `json:"-"`
 	index    int    `json:"-"`
@@ -36,6 +38,8 @@ func NewBoardFromMatrix(matrix [][]int) *Board {
 		}
 	}
 
+	board.cost = board.Cost()
+
 	return &board
 }
 
@@ -46,6 +50,8 @@ func NewBoardFromArray(array []int) *Board {
 	for i := 0; i < board.Len(); i++ {
 		board.State |= (uint(array[i]) << (uint(i) << uint(2)))
 	}
+
+	board.cost = board.Cost()
 
 	return &board
 }
@@ -62,6 +68,8 @@ func NewRandomBoard(dimension int) *Board {
 	for !board.Solvable() {
 		board = NewBoardFromArray(r.Perm(length))
 	}
+
+	board.cost = board.Cost()
 
 	return board
 }
@@ -150,6 +158,7 @@ func (board *Board) Clone() *Board {
 	clone := NewBoard()
 	*clone = *board
 	clone.previous = board
+	clone.g = board.g + 1
 	return clone
 }
 
@@ -228,7 +237,7 @@ func (board *Board) Left() *Board {
 	tile := clone.GetTileAt(blankPosition - 1)
 	clone.SetTileAt(blankPosition-1, BLANK)
 	clone.SetTileAt(blankPosition, tile)
-
+	clone.cost = clone.g + clone.Cost()
 	return clone
 }
 
@@ -244,7 +253,7 @@ func (board *Board) Right() *Board {
 	tile := clone.GetTileAt(blankPosition + 1)
 	clone.SetTileAt(blankPosition+1, BLANK)
 	clone.SetTileAt(blankPosition, tile)
-
+	clone.cost = clone.g + clone.Cost()
 	return clone
 }
 
@@ -260,7 +269,7 @@ func (board *Board) Up() *Board {
 	tile := clone.GetTileAt(blankPosition - board.Dimension)
 	clone.SetTileAt(blankPosition-board.Dimension, BLANK)
 	clone.SetTileAt(blankPosition, tile)
-
+	clone.cost = clone.g + clone.Cost()
 	return clone
 }
 
@@ -276,6 +285,6 @@ func (board *Board) Down() *Board {
 	tile := clone.GetTileAt(blankPosition + board.Dimension)
 	clone.SetTileAt(blankPosition+board.Dimension, BLANK)
 	clone.SetTileAt(blankPosition, tile)
-
+	clone.cost = clone.g + clone.Cost()
 	return clone
 }

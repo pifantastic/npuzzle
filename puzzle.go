@@ -12,7 +12,7 @@ const (
 	LEFT  = "Left"
 	RIGHT = "Right"
 
-	BLANK = 8
+	BLANK = 0
 
 	EIGHT_PIECE_GOAL   uint = 36344967696
 	FIFTEEN_PIECE_GOAL uint = 18364758544493064720
@@ -35,12 +35,17 @@ func NewPuzzle(dimension int) *Puzzle {
 	return &puzzle
 }
 
-// Returns an array of the "moves" required to solve the puzzle.
+// Returns an array of the "moves" required to solve the puzzle. Implements the
+// A* search algorithm (https://en.wikipedia.org/wiki/A*_search_algorithm).
 func (puzzle *Puzzle) Solve() []string {
 	solved := false
 
-	openMap := make(map[uint]*Board)
+	// Board states already evaluated.
 	closedMap := make(map[uint]*Board)
+
+	// Current set of board states being evaluated. The map is for fast lookups
+	// and the priority queue sorts board states by cost.
+	openMap := make(map[uint]*Board)
 	open := make(PriorityQueue, 0)
 
 	heap.Init(&open)
@@ -60,7 +65,7 @@ func (puzzle *Puzzle) Solve() []string {
 			break
 		}
 
-		// Record this board state.
+		// Record that we've seen this board state.
 		closedMap[current.State] = current
 
 		// Expand the board's state into all possible moves.
@@ -71,13 +76,19 @@ func (puzzle *Puzzle) Solve() []string {
 				continue
 			}
 
+			// Check the new state against the closed and open maps.
 			closedItem, closedItemExists := closedMap[next.State]
 			openItem, openItemExists := openMap[next.State]
 
-			if !closedItemExists || next.Cost() < closedItem.Cost() {
+			// If this board state has not been visited before, or its cost has
+			// decreased, place it on the open map.
+			if !closedItemExists || next.cost < closedItem.cost {
 				heap.Push(&open, next)
 				openMap[next.State] = next
-			} else if openItemExists && next.Cost() < openItem.Cost() {
+			} else if openItemExists && next.cost < openItem.cost {
+				// If this board state is currently in the open map, and its cost has
+				// improved, update its cost in the open queue.
+				openItem.cost = next.cost
 				open.update(openItem)
 				openMap[next.State] = next
 			}
@@ -87,6 +98,8 @@ func (puzzle *Puzzle) Solve() []string {
 	if solved {
 		solution := []string{current.move}
 
+		// Reconstruct the solution by tracing the final board state back through
+		// its preceding states.
 		for current.previous != nil && current.previous.move != "" {
 			solution = append([]string{current.previous.move}, solution...)
 			current = current.previous

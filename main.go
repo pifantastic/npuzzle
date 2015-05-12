@@ -41,4 +41,12 @@ func main() {
 	// Start the web server.
 	log.Printf("Listening at http://localhost:%d", port)
 	http.ListenAndServe(fmt.Sprintf(":%d", port), LoggingMiddleware(http.DefaultServeMux))
+
+	puzzle := NewPuzzle(3)
+	puzzle.Board = NewBoardFromMatrix([][]int{
+		[]int{5, 7, 3},
+		[]int{1, 4, 8},
+		[]int{2, 6, 0},
+	})
+	fmt.Printf("+%v", puzzle.Solve())
 }
