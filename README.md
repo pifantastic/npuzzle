@@ -13,9 +13,13 @@ installing node can be found [here](https://nodejs.org/download/).
 
 ## Installation
 
-`go get github.com/pifantastic/npuzzle`
+If you have `go` installed and have set your `$GOPATH` to your workspace, you
+you should be able to run the following:
 
-To run the local web server, execute `make` in the root directory.
+`go get github.com/pifantastic/npuzzle`
+`npuzzle`
+
+Alternatively, you can check out the source and run `make` in the root directory.
 
 ## Tests
 
