@@ -84,6 +84,15 @@ func (board *Board) MarshalJSON() ([]byte, error) {
 	})
 }
 
+func (board *Board) UnmarshalJSON(data []byte) error {
+	json.Unmarshal(data, struct {
+		Board
+		State []int `json:"state"`
+	}{})
+
+	return nil
+}
+
 // Returns the length of the board (the total number of tiles).
 func (board *Board) Len() int {
 	return board.Dimension * board.Dimension
